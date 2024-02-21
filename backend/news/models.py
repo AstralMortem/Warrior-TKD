@@ -24,3 +24,6 @@ class NewsImage(models.Model):
 
     def __str__(self):
         return self.news.title
+    class Meta:
+        verbose_name = "Фото новини"
+        verbose_name_plural = "Фото новин"

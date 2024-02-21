@@ -25,6 +25,7 @@ CORE_APPS = [
 CREATED_APPS = [
     'account',
     'news',
+    'gyms',
 
 ]
 
