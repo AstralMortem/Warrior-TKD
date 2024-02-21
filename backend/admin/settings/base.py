@@ -26,6 +26,7 @@ CREATED_APPS = [
     'account',
     'news',
     'gyms',
+    'events',
 
 ]
 
