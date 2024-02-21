@@ -4,6 +4,8 @@ import dj_database_url
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
+SECRET_KEY = "testsecret"
+
 DATABASES = {
         'default': dj_database_url.parse(os.getenv('DATABASE_URL'),
         conn_max_age=600,
@@ -11,7 +13,7 @@ DATABASES = {
     }
 
 STATIC_URL = 'static/'
-STATIC_ROOT = ''
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIR = [
     BASE_DIR / 'static/'
 ]

@@ -3,6 +3,9 @@ from django.core.management.utils import get_random_secret_key
 from .rest import *
 from .jazzmin import *
 import os
+import mimetypes
+mimetypes.add_type("text/css", ".css", True)
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -19,11 +22,16 @@ CORE_APPS = [
 ]
 
 CREATED_APPS = [
-
+    'account'
 ]
 
 THIRD_PARTY_APPS = [
     "corsheaders",
+    "rest_framework",
+    'storages',
+    'django_filters',
+    'django_jsonform',
+    'location_field.apps.DefaultConfig',
 ]
 
 INSTALLED_APPS = CORE_APPS
@@ -87,3 +95,6 @@ USE_I18N = True
 USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'account.BaseUser'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
