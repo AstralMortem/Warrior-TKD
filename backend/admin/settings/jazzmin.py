@@ -13,15 +13,16 @@ JAZZMIN_SETTINGS = {
     # SIDE MENU
     "icons":{
         "account.BaseUser": "fas fa-user",
-        # "events.Competition": "fas fa-trophy",
-        # "events.Attestation": "fas fa-graduation-cap",
-        # "gyms.Gym": "fas fa-dumbbell",
-        # "gyms.Group": "fas fa-users",
-        # "news.News": "fas fa-newspaper",
-        # "attendance.Attendance": "fas fa-bookmark",
+        "events.Competition": "fas fa-trophy",
+        "events.Attestation": "fas fa-graduation-cap",
+        "gyms.Gym": "fas fa-dumbbell",
+        "gyms.Group": "fas fa-users",
+        "news.News": "fas fa-newspaper",
+        "attendance.Attendance": "fas fa-bookmark",
         "account.Belt": "fas fa-bacon",
     },
-    "related_modal_active":True
+    "related_modal_active":True,
+    "hide_models": ['auth.Group'],
 }
 
 JAZZMIN_UI_TWEAKS = {

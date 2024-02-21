@@ -2,13 +2,10 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import BaseUserCreationForm
 from django.utils.html import format_html
-
 from .models import BeltDescription, Belt, BaseUser
 from django.utils.translation import gettext_lazy as _
-from django.contrib.postgres.forms import SimpleArrayField
-from django import forms
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
-# Register your models here.
+
 
 
 
@@ -47,6 +44,11 @@ class CustomUserAdmin(UserAdmin,DynamicArrayMixin):
 
 
     prepopulated_fields = {'email':('full_name',)}
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "coach":
+            kwargs["queryset"] = BaseUser.objects.filter(is_staff=True)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
     def image_tag(self, obj):

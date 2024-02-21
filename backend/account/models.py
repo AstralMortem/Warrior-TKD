@@ -103,7 +103,7 @@ class BaseUser(AbstractBaseUser,PermissionsMixin):
     birthday = models.DateField("День народження",null=True,blank=True)
     itf_code = models.PositiveBigIntegerField("Код в базі itf-ua",null=True,blank=True)
     itf_link = models.URLField("Силка на itf-ua",null=True,blank=True)
-    links = ArrayField(models.URLField("Силка на соціальну мережу",blank=True,null=True), size=8,blank=True,null=True)
+    links = ArrayField(models.URLField("Силка на соціальну мережу",blank=True,null=True), size=8,blank=True,null=True,verbose_name="Силки на соц. мережі")
     coach = models.ForeignKey('self', on_delete=models.SET_NULL, null=True,blank=True, verbose_name="Тренер")
     rating = models.PositiveBigIntegerField("Рейтинг",default=0)
 
