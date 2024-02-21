@@ -2,6 +2,7 @@ from pathlib import Path
 from django.core.management.utils import get_random_secret_key
 from .rest import *
 from .jazzmin import *
+from .ckeditor import *
 import os
 import mimetypes
 mimetypes.add_type("text/css", ".css", True)
@@ -22,13 +23,16 @@ CORE_APPS = [
 ]
 
 CREATED_APPS = [
-    'account'
+    'account',
+    'news',
+
 ]
 
 THIRD_PARTY_APPS = [
     "corsheaders",
     "rest_framework",
     'storages',
+    'django_ckeditor_5',
     'django_filters',
     'django_jsonform',
     'location_field.apps.DefaultConfig',
@@ -98,3 +102,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'account.BaseUser'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
+CORS_ALLOW_ALL_ORIGINS=True
+
+

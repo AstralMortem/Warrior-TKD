@@ -18,23 +18,6 @@ STATICFILES_DIR = [
     BASE_DIR / 'static/'
 ]
 
+MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_URL = 'media/'
 
-STORAGES = {
-    "default": {
-        "BACKEND": "storages.backends.s3.S3Storage",
-        "OPTIONS":{
-            "access_key": os.getenv("ACCESS_KEY"),
-            "secret_key": os.getenv("SECRET_KEY"),
-            "bucket_name": os.getenv("BUCKET_NAME"),
-            "region_name": os.getenv("REGION_NAME"),
-            "endpoint_url": "http://localhost:4566",
-            "object_parameters": {
-                "CacheControl": "max-age=86400"
-            },
-        }
-    },
-    "staticfiles": 
-        {
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
-        }
-}
