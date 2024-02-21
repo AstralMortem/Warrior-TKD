@@ -1,6 +1,6 @@
 from rest_framework.serializers import ModelSerializer
 from .models import BaseUser,Belt,BeltDescription
-# from events.serializers import CompetitionResultSerializer, CompetitionJudgmentSerializer, AttestationResultSerializer
+from events.serializers import CompetitionResultSerializer, CompetitionJudgmentSerializer, AttestationResultSerializer
 
 
 
@@ -33,9 +33,9 @@ class UserListSerializer(ModelSerializer):
 class UserDetailSerializer(ModelSerializer):
     coach = UserListSerializer(many=False)
     belt = BeltListSerializer(many=False)
-    # competitions = CompetitionResultSerializer(source="participant_to_competition", many=True)
-    # judgments = CompetitionJudgmentSerializer(source="judge_to_competition", many=True)
-    # attestations = AttestationResultSerializer(source="participant_to_attestation",many=True)
+    competitions = CompetitionResultSerializer(source="participant_to_competition", many=True)
+    judgments = CompetitionJudgmentSerializer(source="judge_to_competition", many=True)
+    attestations = AttestationResultSerializer(source="participant_to_attestation",many=True)
     class Meta:
         model = BaseUser
         exclude = [

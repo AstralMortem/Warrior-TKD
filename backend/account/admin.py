@@ -4,7 +4,7 @@ from django.contrib.auth.forms import BaseUserCreationForm
 from django.utils.html import format_html
 from .models import BeltDescription, Belt, BaseUser
 from django.utils.translation import gettext_lazy as _
-from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
+
 
 
 
@@ -21,7 +21,7 @@ class CustomAddForm(BaseUserCreationForm):
         model = BaseUser
         fields = ('email','full_name')
 
-class CustomUserAdmin(UserAdmin,DynamicArrayMixin):
+class CustomUserAdmin(UserAdmin):
     add_form = CustomAddForm
     
     fieldsets = (
