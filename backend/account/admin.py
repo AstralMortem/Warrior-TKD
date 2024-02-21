@@ -28,12 +28,11 @@ class CustomUserAdmin(UserAdmin,DynamicArrayMixin):
     add_form = CustomAddForm
     
     fieldsets = (
-        (None, {'fields': ('email','mobile', 'password')}),
-        (_('Personal info'), {'fields': ('photo','full_name','gender','belt', 'coach_type', 'judge_type', 
+        ("Головна", {'fields': ('email','mobile','full_name', 'password')}),
+        ("Персональна інформація", {'fields': ('photo','gender','belt','birthday', 'coach_type', 'judge_type', 
                                          'itf_code', 'itf_link', 'links', 'coach')}),
-        (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+        ("Дозволи", {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
-        (_('Important dates'), {'fields': ('birthday','last_login', 'date_joined')}),
     )
     add_fieldsets = (
         (None, {

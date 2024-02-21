@@ -24,9 +24,14 @@ class Belt(models.Model):
     
 class BeltDescription(models.Model):
     id = models.OneToOneField(Belt, verbose_name="Норматив поясу", on_delete=models.CASCADE, primary_key=True, related_name='description')
+    tul = models.TextField("Туль",blank=True)
+    sparings = models.TextField("Cпаринг",blank=True)
+    kicks = models.TextField("Удари",blank=True)
+    self_defence = models.TextField("Самозахист",blank=True)
+    spec_tech = models.TextField("Спец.Техніка",blank=True)
+    power_breaking = models.TextField("Силове розбивання",blank=True)
     ofp = models.TextField("ОФП",blank=True)
-    
-    #TODO: expand model
+    theory = models.TextField("Теорія",blank=True)
 
     def __str__(self):
         return str(self.id)
@@ -100,6 +105,7 @@ class BaseUser(AbstractBaseUser,PermissionsMixin):
     itf_link = models.URLField("Силка на itf-ua",null=True,blank=True)
     links = ArrayField(models.URLField("Силка на соціальну мережу",blank=True,null=True), size=8,blank=True,null=True)
     coach = models.ForeignKey('self', on_delete=models.SET_NULL, null=True,blank=True, verbose_name="Тренер")
+    rating = models.PositiveBigIntegerField("Рейтинг",default=0)
 
 
 
@@ -120,5 +126,5 @@ class BaseUser(AbstractBaseUser,PermissionsMixin):
         return self.email
 
     class Meta:
-        verbose_name = "Учасник"
+        verbose_name = "Учасника"
         verbose_name_plural = "Учасники"
