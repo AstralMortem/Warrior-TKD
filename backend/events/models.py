@@ -1,5 +1,7 @@
 from django.db import models
-from django.contrib.postgres.fields import DateRangeField
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.db.models import Q, F
 
 # Create your models here.
 
@@ -15,7 +17,7 @@ class IEvent(models.Model):
         abstract = True
 
     def __str__(self):
-        return f"{self.title} ({self.place},{self.date.lower})"
+        return f"{self.title} ({self.place},{self.date_start})"
 
 
 COMPETITION_PLACE = (
@@ -120,9 +122,23 @@ class AttestationResult(models.Model):
     class Meta:
         verbose_name="Результат спортсмена"
         verbose_name_plural="Результати спортсменів"
+    def __str__(self):
+        return self.participant.full_name
     
 class Attestation(IEvent):
     participants = models.ManyToManyField('account.BaseUser',through="AttestationResult", related_name='attestation_participant',verbose_name="Спортсмени")
     class Meta:
         verbose_name="Атестацію"
         verbose_name_plural="Атестації"
+
+
+
+###SIGNALS
+@receiver([post_save],sender=Attestation)
+def handle_attestation(sender,instance,**kwargs):
+    if(instance.is_completed):
+        for result in instance.attestation_to_participant.all():
+            if(result.participant.belt !=result.to_belt ):
+                result.participant.belt = result.to_belt
+                result.participant.save()
+        Attestation.objects.filter(pk=instance.pk).update(is_archived=True)
