@@ -1,0 +1,46 @@
+version: '3.6'
+
+services:
+  postgres:
+    image: postgres
+    container_name: warrior-postgres-dev
+    environment:
+      POSTGRES_DB: "warrior"
+      POSTGRES_USER: "warrior"
+      POSTGRES_PASSWORD: "warrior"
+    volumes:
+      - pgdbdata:/var/lib/postgresql/data/
+    expose:
+      - 5432
+
+  backend-dev:
+    container_name: warrior-backend-dev
+    build:
+      context: .
+      dockerfile: ./docker/backend/Dockerfile.dev
+    command: bash -c "python manage.py migrate --noinput && gunicorn admin.wsgi:application --workers 10 --log-level debug --timeout 120 --bind 0.0.0.0:8000 --reload"
+    ports:
+      - "8000:8000"
+    env_file:
+      ./.env.dev
+    volumes:
+      - ./backend:/src
+    depends_on:
+      - postgres
+  
+  localstack-dev:
+    container_name: "warrior-localstack"
+    image: localstack/localstack
+    ports:
+      - "4566:4566"            # LocalStack Gateway
+      - "4510-4559:4510-4559"
+      - "8080:8080"  # external services port range
+    environment:
+      - DEBUG=1
+      - PORT_WEB_UI=8080
+    volumes:
+      - "./s3-storage:/var/lib/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+
+volumes:
+  pgdbdata:
