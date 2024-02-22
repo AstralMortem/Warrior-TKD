@@ -27,8 +27,13 @@ class CompetitionAdmin(admin.ModelAdmin):
     inlines = [CompetitionResultAdmin,CompetitionJudgmentResult]
 
     list_display = ('title', 'place','get_date','is_completed', 'is_archived')
-    search_fields = ('title', 'place','date_start')
+    search_fields = ('title', 'place')
     ordering = ('is_completed','is_archived','date_start')
+    list_filter = [
+        "date_start",
+        "is_completed",
+        "is_archived"
+    ]
 
     def get_date(self,obj):
         if obj.date_end:

@@ -10,8 +10,8 @@ class IEvent(models.Model):
     place = models.CharField("Місце проведення",max_length=250)
     date_start = models.DateField("Дата початку")
     date_end = models.DateField("Дата завершення",null=True,blank=True)
-    is_archived = models.BooleanField("Архівувати",default=False)
-    is_completed = models.BooleanField("Завершити",default=False)
+    is_archived = models.BooleanField("Архівовано",default=False)
+    is_completed = models.BooleanField("Завершено",default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
         abstract = True

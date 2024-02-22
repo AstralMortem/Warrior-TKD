@@ -42,6 +42,13 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ('email', 'full_name')
     ordering = ('email','is_active')
     readonly_fields = ["rating"]
+    list_filter = [
+        "coach",
+        "belt",
+        "is_active",
+        "is_staff",
+        "gender"
+    ]
 
 
     prepopulated_fields = {'email':('full_name',)}

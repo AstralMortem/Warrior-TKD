@@ -13,6 +13,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 SECRET_KEY = os.getenv("SECRET_DJANGO",get_random_secret_key())
 
 CORE_APPS = [
+    'admin_tools_stats',  # this must be BEFORE 'admin_tools' and 'django.contrib.admin'
+    'django_nvd3',
     'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -28,7 +30,6 @@ CREATED_APPS = [
     'gyms',
     'events',
     'attendance',
-    'statistic',
 
 ]
 
@@ -112,3 +113,9 @@ LOCATION_FIELD = {
     'map.provider': 'openstreetmap'
 }
 
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+#         'LOCATION': 'unix:/tmp/memcached.sock',
+#     }
+# }

@@ -218,12 +218,6 @@
                                     <p>{% trans 'Dashboard' %}</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{% url 'statistic:index' %}" class="nav-link">
-                                    <i class="nav-icon fas fa-th-large"></i>
-                                    <p>Статистика</p>
-                                </a>
-                            </li>
 
                             {% if jazzmin_settings.navigation_expanded %}
                                 {% for app in side_menu_list %}
@@ -329,22 +323,34 @@
         {% endblock %}
     </div>
 
-{% block footer %}
-    {% if not is_popup %}
-        <footer class="main-footer {{ jazzmin_ui.footer_classes }}">
-            <div class="float-right d-none d-sm-inline">
-                <b>{% trans 'Jazzmin version' %}</b> {% get_jazzmin_version %}
-            </div>
-            {% autoescape off %}
-                <strong>{% trans 'Copyright' %} &copy; {% now 'Y' %} {{ jazzmin_settings.copyright }}.</strong> {% trans 'All rights reserved.' %}
-            {% endautoescape %}
-        </footer>
-        {% if jazzmin_settings.show_ui_builder %}
-            {% include 'jazzmin/includes/ui_builder_panel.html' %}
-        {% endif %}
-    {% endif %}
-{% endblock %}
 
+
+    {% if not is_popup %}
+    <footer class="main-footer {{ jazzmin_ui.footer_classes }}">
+        <div class="card">
+            <div class="card-body p-4">
+                {%block footer%}
+                {%endblock%}
+            </div>
+        </div>
+    </footer>
+    {%endif%}
+    
+    {% block footer_end %}
+        {% if not is_popup %}
+            <footer class="main-footer {{ jazzmin_ui.footer_classes }}">
+                <div class="float-right d-none d-sm-inline">
+                    <b>{% trans 'Jazzmin version' %}</b> {% get_jazzmin_version %}
+                </div>
+                {% autoescape off %}
+                    <strong>{% trans 'Copyright' %} &copy; {% now 'Y' %} {{ jazzmin_settings.copyright }}.</strong> {% trans 'All rights reserved.' %}
+                {% endautoescape %}
+            </footer>
+            {% if jazzmin_settings.show_ui_builder %}
+                {% include 'jazzmin/includes/ui_builder_panel.html' %}
+            {% endif %}
+        {% endif %}
+    {% endblock %}
 </div>
 
 {% if jazzmin_settings.show_ui_builder %}
