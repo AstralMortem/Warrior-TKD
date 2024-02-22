@@ -10,6 +10,7 @@ urlpatterns = [
     path('api/news/',include('news.urls')),
     path('api/gyms/',include('gyms.urls')),
     path('api/events/',include('events.urls')),
+    path('statistic/',include('statistic.urls'),name="statistic"),
     # path('api/main-page/',MainPageView.as_view(), name='main-page')
 
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),

@@ -23,6 +23,13 @@ JAZZMIN_SETTINGS = {
     },
     "related_modal_active":True,
     "hide_models": ['auth.Group'],
+    # "custom_links":{
+    #     "statistic": [{
+    #         "name": "Stats",
+    #         "url": "/statistic/",
+    #         "icon": "fas fa-comments",
+    #     }]
+    # }
 }
 
 JAZZMIN_UI_TWEAKS = {
