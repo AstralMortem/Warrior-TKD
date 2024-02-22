@@ -26,8 +26,8 @@ class CustomUserAdmin(UserAdmin):
     
     fieldsets = (
         ("Головна", {'fields': ('email','mobile','full_name', 'password')}),
-        ("Персональна інформація", {'fields': ('photo','gender','belt','birthday', 'coach_type', 'judge_type', 
-                                         'itf_code', 'itf_link', 'links', 'coach')}),
+        ("Персональна інформація", {'fields': ('photo','gender','belt','birthday', 'rating','coach','coach_type', 'judge_type', 
+                                         'itf_code', 'itf_link', 'links')}),
         ("Дозволи", {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
     )
@@ -37,10 +37,11 @@ class CustomUserAdmin(UserAdmin):
             'fields': ('full_name','email', 'password1', 'password2'),
         }),
     )
-    list_display = ('image_tag','email', 'full_name', 'belt', 'is_staff','is_active')
-    list_display_links = ('image_tag','email', 'full_name')
+    list_display = ('image_tag', 'full_name', 'belt', 'is_staff','is_active','rating')
+    list_display_links = ('image_tag', 'full_name')
     search_fields = ('email', 'full_name')
     ordering = ('email','is_active')
+    readonly_fields = ["rating"]
 
 
     prepopulated_fields = {'email':('full_name',)}
@@ -54,6 +55,7 @@ class CustomUserAdmin(UserAdmin):
     def image_tag(self, obj):
         return format_html('<img src="{}" style="max-width:50px; max-height:50px; border-radius:9999px;"/>'.format(obj.photo.url if obj.photo else "https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"))
 
+    image_tag.short_description = "Фото"
 
 
 admin.site.register(BaseUser,CustomUserAdmin)

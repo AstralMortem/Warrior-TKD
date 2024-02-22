@@ -8,8 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/account/',include('account.urls')),
     path('api/news/',include('news.urls')),
-    # path('api/gyms/',include('gyms.urls')),
-    # path('api/events/',include('events.urls')),
+    path('api/gyms/',include('gyms.urls')),
+    path('api/events/',include('events.urls')),
     # path('api/main-page/',MainPageView.as_view(), name='main-page')
 
     path("ckeditor5/", include('django_ckeditor_5.urls'), name="ck_editor_5_upload_file"),

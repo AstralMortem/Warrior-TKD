@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_save
 from django.dispatch import receiver
 from django.db.models import Q, F
 
@@ -74,6 +74,8 @@ class Competition(IEvent):
 
     participants = models.ManyToManyField('account.BaseUser',through="CompetitionResult", related_name='competition_participant',verbose_name="Учасники")
     judgment = models.ManyToManyField('account.BaseUser',through="CompetitionJudgment", related_name='competition_judge',verbose_name="Судді")
+    is_rating_calculated = models.BooleanField(default=False)
+
 
     def total_medals(self):
         table = self.competition_to_participant.all()
@@ -142,3 +144,28 @@ def handle_attestation(sender,instance,**kwargs):
                 result.participant.belt = result.to_belt
                 result.participant.save()
         Attestation.objects.filter(pk=instance.pk).update(is_archived=True)
+
+@receiver([post_save],sender=Competition)
+def handle_rating_calc(sender,instance,**kwargs):
+    if(instance.is_completed and not instance.is_rating_calculated):
+        koef = [5,4,3,2,1]
+        competition_type = int(instance.competition_type.split('-')[1])
+        comp_results = CompetitionResult.objects.filter(competition=instance)
+        for result in comp_results:
+            res = 0
+            if result.sparing_place:
+                res += koef[result.sparing_place-1]
+            if result.tul_place:
+                res += koef[result.tul_place-1]
+            if result.spec_tech_place:
+                res += koef[result.spec_tech_place-1]
+            res *= competition_type
+            result.participant.rating += int(res)
+            result.participant.save()
+        
+        Competition.objects.filter(pk=instance.pk).update(is_rating_calculated=True)
+        print("Рейтинг перераховано")
+
+
+
+
