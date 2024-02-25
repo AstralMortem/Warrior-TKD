@@ -13,19 +13,19 @@ class GymAdmin(admin.ModelAdmin):
 
 class GroupAdmin(admin.ModelAdmin):
     fieldsets = (
-        (None, {'fields': ('title','gym', 'coach')}),
-        (_('Participants'), {'fields': ('participants',)}),
+        ("Головна", {'fields': ('title','coach', 'gym')}),
+        ("Спортсмени", {'fields': ('participants',)}),
     )
     filter_horizontal = ('participants',)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "coach":
-            kwargs["queryset"] = get_user_model().objects.filter(is_staff=True)
+            kwargs["queryset"] = get_user_model().objects.filter(is_staff=True,is_active=True)
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == 'participants':
-            kwargs['queryset'] = get_user_model().objects.filter(is_staff=False)
+            kwargs['queryset'] = get_user_model().objects.filter(is_staff=False,is_active=True)
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 admin.site.register(Gym, GymAdmin)

@@ -7,6 +7,7 @@ JAZZMIN_SETTINGS = {
     "copyright": "Warrior TKD Club",
     "user_avatar": "photo",
     "site_logo_classes": "img-circle",
+    "custom_js": "js/script.js",
 
 
     # TOP MENU
@@ -22,14 +23,8 @@ JAZZMIN_SETTINGS = {
         "account.Belt": "fas fa-bacon",
     },
     "related_modal_active":True,
-    "hide_models": ['auth.Group'],
-    # "custom_links":{
-    #     "statistic": [{
-    #         "name": "Stats",
-    #         "url": "/statistic/",
-    #         "icon": "fas fa-comments",
-    #     }]
-    # }
+    "hide_models": ['auth.Group','admin_tools_stats.DashboardStats','admin_tools_stats.DashboardStatsCriteria', 'admin_tools_stats.CachedValue'],
+
 }
 
 JAZZMIN_UI_TWEAKS = {

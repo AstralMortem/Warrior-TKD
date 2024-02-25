@@ -26,8 +26,8 @@ ATTENDANCE_TYPE = (
 )
 
 class AttendanceUser(models.Model):
-    participant = models.ForeignKey('account.BaseUser',on_delete=models.CASCADE,verbose_name="Спортсмен")
-    attendance = models.ForeignKey('Attendance', on_delete=models.CASCADE,verbose_name="Відвідування")
+    participant = models.ForeignKey('account.BaseUser',on_delete=models.CASCADE,verbose_name="Спортсмен",related_name="attendance_to_participant")
+    attendance = models.ForeignKey('Attendance', on_delete=models.CASCADE,verbose_name="Відвідування", related_name="participant_to_attendance")
     attendance_type = models.CharField("Причина",max_length=3, choices=ATTENDANCE_TYPE, default="pre")
     comment = models.CharField("Коментар",max_length=100, blank=True)
 
