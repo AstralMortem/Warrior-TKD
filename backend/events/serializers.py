@@ -1,16 +1,23 @@
+from turtle import title
 from rest_framework.serializers import ModelSerializer, SerializerMethodField
 from .models import Competition,Attestation, CompetitionJudgment, CompetitionResult, AttestationResult
 
 
 
 class AttestationResultSerializer(ModelSerializer):
+    total = SerializerMethodField()
     class Meta:
         model = AttestationResult
-        fields = "__all__"
+        fields = ['total']
+
+    def get_total(self,obj):
+        title = obj.attestation.title
+        date = obj.attestation.date_start
+        return f"{title}({date}): " + f"{obj.from_belt} -> {obj.to_belt}"
+        
 
 
 class AttestationSerializer(ModelSerializer):
-
     class Meta:
         model = Attestation
         fields = "__all__"
@@ -24,7 +31,7 @@ class CompetitionResultSerializer(ModelSerializer):
 
     def get_total(self,obj):
         title = obj.competition.title
-        date = obj.competition.date.lower
+        date = obj.competition.date_start
         res = f"{title}({date}) | "
         if obj.sparing_place:
             res += f"Спаринг - {obj.sparing_place}, "
@@ -43,7 +50,7 @@ class CompetitionJudgmentSerializer(ModelSerializer):
 
     def get_total(self,obj):
         title = obj.competition.title
-        date = obj.competition.date.lower
+        date = obj.competition.date_start
         res = f"{title}({date}) | "
         if(obj.result):
             res += obj.result
