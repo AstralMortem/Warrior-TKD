@@ -5,7 +5,7 @@ global:
 api:
   dashboard: false
   # Set insecure to false for production!
-  insecure: true
+  insecure: false
 
 entryPoints:
   web:
