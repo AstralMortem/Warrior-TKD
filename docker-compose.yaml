@@ -35,6 +35,7 @@ services:
     build: 
       context: .
       dockerfile: ./docker/frontend/Dockerfile
+    command: node /src/.output/server/index.mjs
     expose:
       - 3000
     depends_on:

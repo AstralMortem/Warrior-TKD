@@ -3,54 +3,44 @@
     <UILoader v-if="pending"/>
     <div class="flex flex-col px-4 md:px-[74px] lg:px-[200px] gap-3" v-else>
 
-      <div class="bg-woodsmoke rounded-[10px] md:rounded-[30px] p-3 md:p-5 lg:px-[30px] lg:py-[50px] relative">
-        <div class="absolute top-2 left-2">
+      <div class="bg-woodsmoke rounded-[10px] md:rounded-[30px] p-3 md:p-5 lg:px-[30px] lg:py-[20px] relative">
+        <div class="absolute top-2 md:-left-20 left-2">
           <Icon name="material-symbols:chevron-left" size="3rem"
             class="bg-yellow bg-opacity-50 hover:ring-2 ring-yellow-800 p-1 rounded-full hover:bg-opacity-100 text-black cursor-pointer"
             @click="$router.go(-1)" />
         </div>
-        <div class="flex flex-col md:flex-row-reverse items-center md:justify-between mt-2">
-
-          <img :src="user.photo" class="w-[230px] h-[230px] rounded-full lg:w-[350px] lg:h-[350px] shadow" v-if="user.photo"/>
-          <img src="/img/no_photo.png" class="w-[230px] h-[230px] rounded-full lg:w-[350px] lg:h-[350px] shadow" v-else/>
-
-          <div class="flex-col inline-flex  gap-4">
-            <div class="flex flex-col gap-[9px] md:gap-[15px] ">
-              <p class="text-yellow text-[25px] lg:text-4xl font-semibold font-title text-center md:text-left">{{
-                user.full_name }}</p>
-              <div class="flex flex-col justify-center gap-2 items-center">
-                <img :src="user.belt.photo" class="w-fit h-10"/>
-                <p class="text-base font-normal font-title text-silver text-center md:text-left">{{ user.belt.title }}</p>
-              </div>
-
-              <p class="text-base font-normal font-title text-silver text-center md:text-left" v-if="user.coach_type">{{
+        <div class="flex flex-col md:flex-row-reverse md:justify-between">
+          <div class="flex justify-center items-center">
+            <img :src="user.photo" class="w-[230px] h-[230px] rounded-full lg:w-[350px] lg:h-[350px] shadow" v-if="user.photo"/>
+            <img src="/img/no_photo.png" class="w-[230px] h-[230px] rounded-full lg:w-[350px] lg:h-[350px] shadow" v-else/>
+          </div>
+          <div class="flex-col flex justify-between">
+            <div class="flex flex-col">
+              <p class="text-yellow text-[25px] lg:text-4xl font-semibold font-title text-center md:text-left">{{user.full_name }}</p>
+              <div class="md:mt-[15px] mt-0">
+                <p class="text-base lg:text-xl font-normal font-title text-silver text-center md:text-left"  v-if="user.coach_type">{{
                 getEnumType(user.coach_type, COACH_TYPE) }}</p>
-              <p class="text-base font-normal font-title text-silver text-center md:text-left" v-if="user.judge_type">{{
+                <p class="text-base lg:text-xl font-normal font-title text-silver text-center md:text-left" v-if="user.judge_type">{{
                 getEnumType(user.judge_type, JUDGE_TYPE) }}</p>
-              
-              
+                <p class="text-base lg:text-xl font-normal font-title text-silver text-center md:text-left">{{ user.belt.title }}</p>
+              </div>
             </div>
-            <div class="flex flex-col gap-[9px] md:gap-[15px]">
-              <p class="text-base font-normal font-title text-silver text-center md:text-left">Дата народження: {{
-                user.birthday }}</p>
-              <p class="text-base font-normal font-title text-silver text-center md:text-left" v-if="user.itf_code">Карта
-                учасника:
+            <div class="flex flex-col mb-[20px] md:mb-[30px]">
+              <p class="text-base lg:text-xl font-normal font-title text-silver text-center md:text-left">Дата народження: {{user.birthday }}</p>
+              <p class="text-base lg:text-xl font-normal font-title text-silver text-center md:text-left" v-if="user.itf_code">Карта учасника:
                 <NuxtLink :to="`/participants/${user.itf_link}`" class=" underline">
                   {{ user.itf_code }}
                 </NuxtLink>
               </p>
-              <p class="text-base font-normal font-title text-silver text-center md:text-left" v-if="user.coach">Тренер:
+              <p class="text-base lg:text-xl font-normal font-title text-silver text-center md:text-left" v-if="user.coach">Тренер:
                 <NuxtLink :to="`/participants/${user.coach.id}`" class=" underline">
                   {{ user.coach.full_name }}
                 </NuxtLink>
               </p>
             </div>
-
           </div>
-
         </div>
-
-        <div class="flex flex-col lg:flex-row gap-4 mt-2 justify-evenly">
+        <div class="flex flex-col lg:flex-row gap-4 mt-2 justify-around">
           <div class="flex flex-col space-y-3 p-4 rounded-lg ring-1 ring-yellow shadow-md shadow-yellow" v-if="user.mobile">
             <p class="text-base lg:text-xl text-yellow font-title">Телефон</p>
             <p class="text-base lg:text-xl text-alabaster font-title">{{user.mobile}}</p>

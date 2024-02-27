@@ -6,9 +6,9 @@
         
         <NavBar v-on:showEncyclopedia="show_enc=true"/>
         <PageUp/>
-            <Wrapper>
-                <slot/>
-            </Wrapper>
+        <Wrapper>
+          <slot/>
+        </Wrapper>
         <Footer class="mt-4" v-on:showEncyclopedia="show_enc=true"/>
     </div>
 </template>
@@ -30,13 +30,5 @@ const show_enc = ref(false)
   opacity: 0;
 }
 
-.page-enter-active,
-.page-leave-active {
-  transition: all 0.4s;
-}
-.page-enter-from,
-.page-leave-to {
-  opacity: 0;
-  filter: blur(1rem);
-}
+
 </style>
