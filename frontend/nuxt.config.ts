@@ -17,13 +17,12 @@ export default defineNuxtConfig({
   },
   app: {
     pageTransition: {
-      name: 'fade',
-      mode: 'out-in' // default
+      name: 'page', mode: 'out-in'
     },
-    layoutTransition: {
-      name: 'slide',
-      mode: 'out-in' // default
+    head: {
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
     }
+
   }
 
 })
