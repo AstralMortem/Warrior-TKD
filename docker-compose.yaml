@@ -50,7 +50,7 @@ services:
 
   nginx:
     container_name: backend-statics
-    image: nginx:latest
+    image: nginx
     restart: always
     volumes:
       ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
@@ -77,7 +77,7 @@ services:
 
 
 volumes:
-  pgdbdata: null
-  staticfiles: null
+  - pgdbdata: null
+  - staticfiles: null
 
     
