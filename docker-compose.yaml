@@ -78,6 +78,6 @@ services:
 
 volumes:
   pgdbdata: null
-  staticfiles: null
+  static_volume: null
 
     
