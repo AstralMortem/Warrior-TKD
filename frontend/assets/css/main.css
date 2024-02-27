@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Roboto&family=Tektur:wght@400;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+  background: #000;
+}
+
+html{
+  scroll-behavior: smooth;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.5s ease-out;
+  }
+  
+  .slide-fade-leave-active {
+    transition: all 0.5s ease-out
+  }
+  
+  .slide-fade-enter-from,
+  .slide-fade-leave-to {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .swiper-pagination{
+    position: relative !important;
+  }
+
+  .swiper-pagination-bullet{
+    background-color: #bdbdbd !important;
+    width: 3rem !important;
+    height: 0.25rem !important;
+    border-radius: 25px !important;
+  }
+
+  .swiper-pagination-bullet-active {
+    background-color: rgb(215 181 109) !important;
+    width: 3.5rem !important;
+}
+
+.swiper-button-next, .swiper-button-prev{
+  color: rgb(215 181 109) !important;
+}

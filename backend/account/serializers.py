@@ -27,7 +27,7 @@ class UserListSerializer(ModelSerializer):
     belt = BeltListSerializer(many=False)
     class Meta:
         model = BaseUser
-        fields = ['id','full_name','photo', 'is_staff','mobile','belt']
+        fields = ['id','full_name','photo', 'is_staff','mobile','belt','email','coach_type']
 
 
 class UserDetailSerializer(ModelSerializer):

@@ -28,7 +28,6 @@ CREATED_APPS = [
     'gyms',
     'events',
     'attendance',
-    # 'statistic',
 ]
 
 THIRD_PARTY_APPS = [

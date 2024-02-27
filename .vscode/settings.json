@@ -53,5 +53,6 @@
             "comments": true,
             "strings": true
         }
-    }
+    },
+    "files.refactoring.autoSave": false
 }
