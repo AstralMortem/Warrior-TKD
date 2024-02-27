@@ -137,7 +137,7 @@
 import {Autoplay, Pagination, Navigation} from 'swiper/modules'
 
 const {data,pending} = await useAsyncData('main-page', async ()=>{
-    const [{data:news_value},{data:coaches_value},{data:participants_value},{data:gyms_value}] = await Promise.all([
+    const [news_value,coaches_value,participants_value,gyms_value] = await Promise.all([
         useBaseFetch('/api/news/',{query:{
             "limit": "5"
         }}),
@@ -154,10 +154,10 @@ const {data,pending} = await useAsyncData('main-page', async ()=>{
         }})
     ])
     
-    const news = news_value.value.results;
-    const coaches = coaches_value.value.results;
-    const participants = participants_value.value.results;
-    const gyms = gyms_value.value.results;
+    const news = news_value.results;
+    const coaches = coaches_value.results;
+    const participants = participants_value.results;
+    const gyms = gyms_value.results;
 
     return {
         news,
@@ -165,7 +165,7 @@ const {data,pending} = await useAsyncData('main-page', async ()=>{
         participants,
         gyms
     }
-})
+},{server:false,lazy:true})
 
 
 
