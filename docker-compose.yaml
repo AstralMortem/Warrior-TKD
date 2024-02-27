@@ -26,7 +26,7 @@ services:
       - db
       - reverse-proxy
     volumes:
-      static_volume:/src/staticfiles
+      - static_volume:/src/staticfiles
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`api.warrior-tkd.pp.ua`)"
