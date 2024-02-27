@@ -12,7 +12,6 @@ services:
     expose:
       - 5432
 
-
   backend:
     container_name: warrior-backend
     build: 
@@ -26,6 +25,8 @@ services:
     depends_on:
       - db
       - reverse-proxy
+    volumes:
+      static_volume:/src/staticfiles
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.backend.rule=Host(`api.warrior-tkd.pp.ua`)"
@@ -47,6 +48,20 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`warrior-tkd.pp.ua`)"
 
+  nginx:
+    container_name: backend-statics
+    restart: always
+    volumes:
+      ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      static_volume:/static
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`api.warrior-tkd.pp.ua`) && PathPrefix(`/static`)"
+    depends_on:
+      - backend
+      - reverse-proxy
+
+
   reverse-proxy:
     image: traefik:v2.10
     container_name: reverse-proxy
@@ -62,5 +77,6 @@ services:
 
 volumes:
   pgdbdata: null
+  staticfiles: null
 
     
