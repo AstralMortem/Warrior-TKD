@@ -5,12 +5,12 @@
     <div class="flex flex-row justify-center md:justify-start items-center gap-4 px-4">
       <Icon name="material-symbols:chevron-left" size="3rem" class="bg-yellow bg-opacity-50 hover:ring-2 ring-yellow-800 p-1 rounded-full hover:bg-opacity-100 text-black cursor-pointer"
         @click="$router.go(-1)"/>
-      <p class="text-yellow font-semibold font-title text-[25px] lg:text-4xl">{{ data.title }}</p>
+      <p class="text-yellow font-semibold font-title text-[25px] lg:text-4xl self-center">{{ data.title }}</p>
     </div>
     <div class="flex flex-col gap-3 md:gap-5 px-2 md:px-16 lg:px-60">
       <p class="text-base lg:text-xl font-display text-alabaster" v-html="data.text"/>
       <p class="text-sm md:text-base text-silver font-display text-left">{{ convertDate(data.created_at) }}</p>
-      <Swiper  class="ring-2 ring-yellow p-4 rounded-lg" v-if="data.news_images"
+      <Swiper  class="ring-2 ring-yellow p-4 rounded-lg" v-if="data.news_images.length>0"
                 :modules="[SwiperEffectCreative, Autoplay, Pagination, Navigation]"
                 :centeredSlides="true"
                 :slidesPerView="2"
@@ -83,7 +83,7 @@ function convertDate(date_string:string){
 })
 
 useSeoMeta({
-  title: data.value?.full_name +" | TKD клуб ВОЇН",
+  title: "Новина | TKD клуб ВОЇН",
   description: data
 })
   
