@@ -1,0 +1,28 @@
+name: Build & Deploy
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Warrior site
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{secrets.SSH_HOST}}
+          key: ${{secrets.SSH_KEY}}
+          username: ${{secrets.SSH_USERNAME}}
+
+          script: |
+            if test -e www; then rm -r www; fi
+            mkdir www
+            cd www
+            git clone git@github.com:AstralMortem/Warrior-TKD.git .
+            echo 'Request completed'
+            cp ../.env .env
+            echo 'Env file copied'
+            docker compose up -d --build
+      
+            
+            
