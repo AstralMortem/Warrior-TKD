@@ -1,4 +1,5 @@
 from pathlib import Path
+from django.conf.global_settings import SECURE_SSL_REDIRECT
 from django.core.management.utils import get_random_secret_key
 from .rest import *
 from .jazzmin import *
@@ -105,6 +106,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.BaseUser'
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CORS_ALLOW_ALL_ORIGINS=True
+CSRF_COOKIE_SECURE=True
+SESSION_COOKIE_SECURE=True
+SECURE_SSL_REDIRECT = True
+
 
 LOCATION_FIELD = {
     'map.provider': 'openstreetmap'
