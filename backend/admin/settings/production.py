@@ -14,9 +14,12 @@ DATABASES = {
 
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIR = [
-    BASE_DIR / 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static'
 ]
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = 'media/'
 
 STORAGES = {
     "default": {
@@ -32,10 +35,6 @@ STORAGES = {
             },
         }
     },
-    "staticfiles": 
-        {
-            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"
-        }
 }
 
 CSRF_TRUSTED_ORIGINS = [

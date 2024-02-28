@@ -1,7 +1,7 @@
 from .base import *
 import dj_database_url
 
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 SECRET_KEY = "testsecret"
@@ -15,7 +15,7 @@ DATABASES = {
 STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [
-    BASE_DIR / 'static/'
+    BASE_DIR / 'static'
 ]
 
 MEDIA_ROOT = BASE_DIR / 'media'
