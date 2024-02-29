@@ -3,6 +3,7 @@ import dj_database_url
 
 DEBUG = False
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOST').split(',')
+SECRET_KEY = os.getenv("DJANGO_SECRET")
 
 
 DATABASES = {
@@ -48,3 +49,4 @@ CSRF_COOKIE_SECURE=True
 SESSION_COOKIE_SECURE=True
 SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
