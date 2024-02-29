@@ -1,17 +1,12 @@
 from pathlib import Path
-from django.conf.global_settings import SECURE_SSL_REDIRECT
 from django.core.management.utils import get_random_secret_key
 from .rest import *
 from .jazzmin import *
 from .ckeditor import *
 import os
-import mimetypes
-mimetypes.add_type("text/css", ".css", True)
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.getenv("SECRET_DJANGO",get_random_secret_key())
+SECRET_KEY = os.getenv("DJANGO_SECRET",get_random_secret_key())
 
 CORE_APPS = [
     'jazzmin',
@@ -62,7 +57,7 @@ ROOT_URLCONF = 'admin.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR/'templates'],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
