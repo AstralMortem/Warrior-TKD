@@ -75,12 +75,13 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ./docker/traefik/traefik.yaml:/etc/traefik/traefik.yaml
-      - ./docker/traefik/ssl:/ssl-certs/
+      - /root/certificates:/ssl-certs/
 
 
 
 volumes:
   pgdbdata: null
   static_volume: null
+    
 
     
